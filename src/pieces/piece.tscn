@@ -1,0 +1,168 @@
+[gd_scene load_steps=12 format=3 uid="uid://dt26osnw5y8ro"]
+
+[ext_resource type="Texture2D" uid="uid://bc3itby5rrpop" path="res://assets/units/components/Body.png" id="1_6en4s"]
+[ext_resource type="Texture2D" uid="uid://vjiey3dh4f5m" path="res://assets/units/components/Head/HeadPawn.png" id="1_cwrqu"]
+[ext_resource type="Script" path="res://src/pieces/piece.gd" id="1_gepv5"]
+[ext_resource type="Texture2D" uid="uid://cwkbaod5rtlft" path="res://assets/units/components/RightArm/RightArm.png" id="1_p5tjq"]
+[ext_resource type="Texture2D" uid="uid://d32orjk2cgh3b" path="res://assets/units/components/LeftArm/LeftArm.png" id="1_wth5g"]
+[ext_resource type="Script" path="res://src/pieces/Sprites.gd" id="2_s6oty"]
+[ext_resource type="Shader" path="res://src/shaders/color_swap.gdshader" id="2_xgnye"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4m75"]
+resource_local_to_scene = true
+shader = ExtResource("2_xgnye")
+shader_parameter/old_main_color = Color(0.25098, 0.305882, 0.458824, 1)
+shader_parameter/old_shadow_color = null
+shader_parameter/old_light_color = null
+shader_parameter/new_main_color = null
+shader_parameter/new_shadow_color = null
+shader_parameter/new_light_color = null
+
+[sub_resource type="Animation" id="Animation_3168h"]
+resource_name = "Idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Head:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/LeftArm:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/RightArm:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_ky4l2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Head:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/LeftArm:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/RightArm:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5krmw"]
+_data = {
+"Idle": SubResource("Animation_3168h"),
+"RESET": SubResource("Animation_ky4l2")
+}
+
+[node name="Piece" type="Node2D"]
+script = ExtResource("1_gepv5")
+
+[node name="Sprites" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_k4m75")
+script = ExtResource("2_s6oty")
+
+[node name="LeftArm" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+texture = ExtResource("1_wth5g")
+hframes = 6
+vframes = 3
+
+[node name="Body" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+texture = ExtResource("1_6en4s")
+hframes = 6
+vframes = 3
+
+[node name="Head" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+position = Vector2(0, -4)
+texture = ExtResource("1_cwrqu")
+hframes = 6
+vframes = 3
+
+[node name="RightArm" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+texture = ExtResource("1_p5tjq")
+hframes = 6
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5krmw")
+}
+autoplay = "Idle"
+speed_scale = 0.75
