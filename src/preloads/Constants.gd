@@ -10,11 +10,12 @@ var UNITS = {
 			"head": preload("res://assets/units/components/Head/HeadPawn.png")
 		},
 		"move_type": MOVE_TYPES.CELL,
-		"move_directions": [
-			Vector2i.UP,
-		],
+		"move_directions": [],
 		"move_directions_special": [
-			"Vector2i(0, -2) if not {unit_object}.has_moved else null"
+			"Vector2i(0, -1) if {unit}.unit_side == 'blue' else null",
+			"Vector2i(0, 1) if not {unit}.unit_side != 'blue' else null",
+			"Vector2i(0, -2) if not {unit}.has_moved and {unit}.unit_side == 'blue' else null",
+			"Vector2i(0, 2) if not {unit}.has_moved and {unit}.unit_side != 'blue' else null",
 		],
 		"attack_directions": [
 			Vector2i(-1, -1),

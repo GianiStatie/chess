@@ -10,6 +10,8 @@ var unit_side = "blue"
 var is_selected = false
 var is_hovered = false
 
+var has_moved = false
+
 signal was_selected(unit)
 signal was_unselected(unit)
 
