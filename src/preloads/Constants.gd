@@ -11,16 +11,9 @@ var UNITS = {
 		},
 		"move_type": MOVE_TYPES.CELL,
 		"move_directions": [],
-		"move_directions_special": [
-			"Vector2i(0, -1) if {unit}.unit_side == 'blue' else null",
-			"Vector2i(0, 1) if not {unit}.unit_side != 'blue' else null",
-			"Vector2i(0, -2) if not {unit}.has_moved and {unit}.unit_side == 'blue' else null",
-			"Vector2i(0, 2) if not {unit}.has_moved and {unit}.unit_side != 'blue' else null",
-		],
-		"attack_directions": [
-			Vector2i(-1, -1),
-			Vector2i(1, -1)
-		]
+		"attack_directions": [],
+		"has_special_move": true,
+		"has_special_attack": true
 	},
 	"rook": {
 		"sprites": {
@@ -33,13 +26,14 @@ var UNITS = {
 			Vector2i.LEFT,
 			Vector2i.RIGHT
 		],
-		"move_directions_special": [],
 		"attack_directions": [
 			Vector2i.UP,
 			Vector2i.DOWN,
 			Vector2i.LEFT,
 			Vector2i.RIGHT
-		]
+		],
+		"has_special_move": false,
+		"has_special_attack": false
 	},
 	"knight": {
 		"sprites": {
@@ -66,7 +60,9 @@ var UNITS = {
 			Vector2i(-2, 1),
 			Vector2i(-2, -1),
 			Vector2i(-1, -2),
-		]
+		],
+		"has_special_move": false,
+		"has_special_attack": false
 	},
 	"bishop": {
 		"sprites": {
@@ -85,34 +81,19 @@ var UNITS = {
 			Vector2i(1, -1),
 			Vector2i(-1, 1),
 			Vector2i(-1, -1)
-		]
+		],
+		"has_special_move": false,
+		"has_special_attack": false
 	},
 	"king": {
 		"sprites": {
 			"head": preload("res://assets/units/components/Head/HeadKing.png")
 		},
 		"move_type": MOVE_TYPES.CELL,
-		"move_directions": [
-			Vector2i.UP,
-			Vector2i.DOWN,
-			Vector2i.LEFT,
-			Vector2i.RIGHT,
-			Vector2i(1, 1),
-			Vector2i(1, -1),
-			Vector2i(-1, 1),
-			Vector2i(-1, -1)
-		],
-		"move_directions_special": [],
-		"attack_directions": [
-			Vector2i.UP,
-			Vector2i.DOWN,
-			Vector2i.LEFT,
-			Vector2i.RIGHT,
-			Vector2i(1, 1),
-			Vector2i(1, -1),
-			Vector2i(-1, 1),
-			Vector2i(-1, -1)
-		]
+		"move_directions": [],
+		"attack_directions": [],
+		"has_special_move": true,
+		"has_special_attack": true
 	},
 	"queen": {
 		"sprites": {
@@ -129,7 +110,6 @@ var UNITS = {
 			Vector2i(-1, 1),
 			Vector2i(-1, -1)
 		],
-		"move_directions_special": [],
 		"attack_directions": [
 			Vector2i.UP,
 			Vector2i.DOWN,
@@ -139,7 +119,9 @@ var UNITS = {
 			Vector2i(1, -1),
 			Vector2i(-1, 1),
 			Vector2i(-1, -1)
-		]
+		],
+		"has_special_move": false,
+		"has_special_attack": false
 	}
 }
 
