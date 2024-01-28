@@ -170,9 +170,9 @@ func _get_king_special_moves(king_unit):
 		var move_cell = unit_cell + direction
 		var unit_on_move_cell = cell_to_unit.get(move_cell)
 		
+		# can't move is unit is in the way, it's not a valid move or move cell is attacked
 		if (unit_on_move_cell != null) or (not is_valid_cell(move_cell)) or (move_cell in attacked_cells_this_side):
 			continue
-		
 		special_moves.append(move_cell)
 	
 	# can't castle if king has moved
