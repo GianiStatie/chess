@@ -13,14 +13,11 @@ func _ready():
 	position = viewport_center - Vector2i(0, rendering_quadrant_size/2)
 	
 	# set background of map
-	var interactable_cells = []
 	for col in range(map_shape.x):
 		for row in range(map_shape.y):
 			var map_cell = Vector2i(col, row)
-			interactable_cells.append(map_cell)
 			BetterTerrain.set_cell(self, DrawLayers.TERRAIN, map_cell, AutotilerLayers.GROUND)
 			BetterTerrain.update_terrain_cell(self, DrawLayers.TERRAIN, map_cell)
-	GameState.interactable_cells = interactable_cells
 	
 	# set map cliffs
 	for col in map_shape.x:

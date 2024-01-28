@@ -1,9 +1,16 @@
 extends Node2D
 
-@onready var PieceScene = preload("res://src/pieces/piece.tscn")
+@onready var UnitScene = preload("res://src/units/unit.tscn")
 
 @export var map: TileMap
 
+signal unit_spawned_at_cell(unit, cell)
+signal setup_ready
+
+
+func _ready():
+	connect("unit_spawned_at_cell", GameState._on_unit_spawned_at_cell)
+	connect("setup_ready", GameState._on_UnitManager_setup_ready)
 
 func init_board():
 	var row = 0
@@ -13,32 +20,34 @@ func init_board():
 			if element.is_valid_int():
 				column += int(element)
 			else:
-				var piece_info = get_piece_info_from_symbol(element)
+				var unit_info = get_unit_info_from_symbol(element)
 				var map_cell = Vector2i(column, row)
-				create_piece_at_cell(piece_info, map_cell)
+				create_unit_at_cell(unit_info, map_cell)
 			column += 1
 		row += 1
 		column = 0
+	emit_signal("setup_ready")
 
-func create_piece_at_cell(piece_info, map_cell):
-	var piece_global_position = map.map_to_global(map_cell)
-	var piece = PieceScene.instantiate()
-	piece.init(piece_info)
-	piece.global_position = piece_global_position
-	add_child(piece)
+func create_unit_at_cell(unit_info, map_cell):
+	var unit_global_position = map.map_to_global(map_cell)
+	var unit = UnitScene.instantiate()
+	unit.init(unit_info)
+	unit.global_position = unit_global_position
+	add_child(unit)
+	emit_signal("unit_spawned_at_cell", unit, map_cell)
 
-func get_piece_info_from_symbol(symbol: String):
-	var piece_type = null
+func get_unit_info_from_symbol(symbol: String):
+	var unit_type = null
 	match symbol.to_lower():
-		"p": piece_type = "pawn"
-		"n": piece_type = "knight"
-		"r": piece_type = "rook"
-		"b": piece_type = "bishop"
-		"q": piece_type = "queen"
-		"k": piece_type = "king"
-	var piece_side = "red" if symbol.capitalize() == symbol else "blue"
-	var piece_info = {
-		"piece_type": piece_type,
-		"piece_side": piece_side
+		"p": unit_type = "pawn"
+		"n": unit_type = "knight"
+		"r": unit_type = "rook"
+		"b": unit_type = "bishop"
+		"q": unit_type = "queen"
+		"k": unit_type = "king"
+	var unit_side = "blue" if symbol.capitalize() == symbol else "red"
+	var unit_info = {
+		"unit_type": unit_type,
+		"unit_side": unit_side
 	}
-	return piece_info
+	return unit_info

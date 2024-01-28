@@ -1,16 +1,16 @@
 [gd_scene load_steps=12 format=3 uid="uid://dt26osnw5y8ro"]
 
-[ext_resource type="Texture2D" uid="uid://bc3itby5rrpop" path="res://assets/units/components/Body.png" id="1_6en4s"]
-[ext_resource type="Texture2D" uid="uid://vjiey3dh4f5m" path="res://assets/units/components/Head/HeadPawn.png" id="1_cwrqu"]
-[ext_resource type="Script" path="res://src/pieces/piece.gd" id="1_gepv5"]
-[ext_resource type="Texture2D" uid="uid://cwkbaod5rtlft" path="res://assets/units/components/RightArm/RightArm.png" id="1_p5tjq"]
-[ext_resource type="Texture2D" uid="uid://d32orjk2cgh3b" path="res://assets/units/components/LeftArm/LeftArm.png" id="1_wth5g"]
-[ext_resource type="Script" path="res://src/pieces/Sprites.gd" id="2_s6oty"]
-[ext_resource type="Shader" path="res://src/shaders/color_swap.gdshader" id="2_xgnye"]
+[ext_resource type="Script" path="res://src/units/Unit.gd" id="1_8x6h0"]
+[ext_resource type="Shader" path="res://src/shaders/color_swap.gdshader" id="2_3p44k"]
+[ext_resource type="Script" path="res://src/units/Sprites.gd" id="3_bpj27"]
+[ext_resource type="Texture2D" uid="uid://d32orjk2cgh3b" path="res://assets/units/components/LeftArm/LeftArm.png" id="4_etirj"]
+[ext_resource type="Texture2D" uid="uid://bc3itby5rrpop" path="res://assets/units/components/Body.png" id="5_j7wdq"]
+[ext_resource type="Texture2D" uid="uid://vjiey3dh4f5m" path="res://assets/units/components/Head/HeadPawn.png" id="6_gf5ph"]
+[ext_resource type="Texture2D" uid="uid://cwkbaod5rtlft" path="res://assets/units/components/RightArm/RightArm.png" id="7_xq6lt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k4m75"]
 resource_local_to_scene = true
-shader = ExtResource("2_xgnye")
+shader = ExtResource("2_3p44k")
 shader_parameter/old_main_color = Color(0.25098, 0.305882, 0.458824, 1)
 shader_parameter/old_shadow_color = null
 shader_parameter/old_light_color = null
@@ -128,35 +128,35 @@ _data = {
 "RESET": SubResource("Animation_ky4l2")
 }
 
-[node name="Piece" type="Node2D"]
-script = ExtResource("1_gepv5")
+[node name="Unit" type="Node2D"]
+script = ExtResource("1_8x6h0")
 
 [node name="Sprites" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_k4m75")
-script = ExtResource("2_s6oty")
+script = ExtResource("3_bpj27")
 
 [node name="LeftArm" type="Sprite2D" parent="Sprites"]
 use_parent_material = true
-texture = ExtResource("1_wth5g")
+texture = ExtResource("4_etirj")
 hframes = 6
 vframes = 3
 
 [node name="Body" type="Sprite2D" parent="Sprites"]
 use_parent_material = true
-texture = ExtResource("1_6en4s")
+texture = ExtResource("5_j7wdq")
 hframes = 6
 vframes = 3
 
 [node name="Head" type="Sprite2D" parent="Sprites"]
 use_parent_material = true
 position = Vector2(0, -4)
-texture = ExtResource("1_cwrqu")
+texture = ExtResource("6_gf5ph")
 hframes = 6
 vframes = 3
 
 [node name="RightArm" type="Sprite2D" parent="Sprites"]
 use_parent_material = true
-texture = ExtResource("1_p5tjq")
+texture = ExtResource("7_xq6lt")
 hframes = 6
 vframes = 3
 
@@ -164,5 +164,4 @@ vframes = 3
 libraries = {
 "": SubResource("AnimationLibrary_5krmw")
 }
-autoplay = "Idle"
 speed_scale = 0.75
