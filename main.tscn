@@ -401,7 +401,7 @@ metadata/_better_terrain = {
 "path": ""
 }], ["Cliffs", Color(0.627403, 0.206814, 0.828745, 1), 0, [], {
 "path": ""
-}], ["FolliageGreen", Color(1, 0, 0.701961, 1), 0, [], {
+}], ["FoliageGreen", Color(1, 0, 0.701961, 1), 0, [], {
 "path": ""
 }], ["FolliageYellow", Color(0.0313726, 0, 1, 1), 0, [], {
 "path": ""

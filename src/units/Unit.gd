@@ -12,5 +12,5 @@ func init(unit_info):
 func _ready():
 	sprites.update_sprites(
 		Constants.UNITS[unit_type]["sprites"],
-		Constants.PALETTS[unit_side]
+		Constants.PALETTES[unit_side]
 	)

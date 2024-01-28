@@ -1,7 +1,7 @@
 extends TileMap
 
-enum DrawLayers {TERRAIN, FOLLIAGE, EFFECTS}
-enum AutotilerLayers {GROUND, CLIFFS, FOLLIAGE_GREEN, FOLLIAGE_YELLOW}
+enum DrawLayers {TERRAIN, FOLIAGE, EFFECTS}
+enum AutotilerLayers {GROUND, CLIFFS, FOLIAGE_GREEN, FOLIAGE_YELLOW}
 
 
 func _ready():
@@ -28,8 +28,8 @@ func _ready():
 	for col in map_shape.x:
 		for row in map_shape.y:
 			var map_cell = Vector2i(col, row)
-			BetterTerrain.set_cell(self, DrawLayers.FOLLIAGE, map_cell, AutotilerLayers.FOLLIAGE_GREEN)
-			BetterTerrain.update_terrain_cell(self, DrawLayers.FOLLIAGE, map_cell)
+			BetterTerrain.set_cell(self, DrawLayers.FOLIAGE, map_cell, AutotilerLayers.FOLIAGE_GREEN)
+			BetterTerrain.update_terrain_cell(self, DrawLayers.FOLIAGE, map_cell)
 
 func map_to_global(cell):
 	var cell_local_position = map_to_local(cell)

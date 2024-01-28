@@ -126,7 +126,7 @@ var UNITS = {
 	}
 }
 
-var PALETTS = {
+var PALETTES = {
 	"red": {
 		"new_main_color": Color("#b25455"),
 		"new_shadow_color": Color("#653b59"),
