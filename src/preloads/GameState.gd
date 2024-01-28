@@ -1,7 +1,7 @@
 extends Node
 
 #var start_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
-var start_FEN = "rnbqkbnr/pppppppp/8/8/8/8/8/R3K2R"
+var start_FEN = "rnbqkbnr/pppppppp/8/8/8/4q3/4q3/R3K2R"
 
 var map_setup_ready = false
 
@@ -53,7 +53,7 @@ func update_action_cells():
 			units_movement_cells[unit] += special_movement
 		
 		if has_special_attack:
-			var special_attack = []
+			var special_attack = generate_special_attack(unit)
 			units_attack_cells[unit] += special_attack
 		
 
@@ -122,6 +122,16 @@ func generate_special_movement(unit):
 	
 	return special_moves
 
+func generate_special_attack(unit):
+	var special_moves = []
+	match unit.unit_type:
+		"pawn":
+			return []
+		"king":
+			return _get_king_special_attack(unit)
+	
+	return special_moves
+
 func is_valid_cell(cell):
 	return cell in Constants.MAP_CELLS_META
 
@@ -182,6 +192,21 @@ func _get_king_special_moves(king_unit):
 	special_moves += _get_valid_castle_move(king_unit, Vector2i.LEFT, 4)
 	special_moves += _get_valid_castle_move(king_unit, Vector2i.RIGHT, 3)
 	
+	return special_moves
+
+func _get_king_special_attack(king_unit):
+	var special_moves = []
+	
+	var unit_cell = units_to_cell[king_unit]
+	var attacked_cells_this_side = attacked_cells[king_unit.unit_side]
+	for direction in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+		var attack_cell = unit_cell + direction
+		var unit_on_attack_cell = cell_to_unit.get(attack_cell)
+		
+		if unit_on_attack_cell == null or attack_cell in attacked_cells_this_side:
+			continue
+		
+		special_moves.append(attack_cell)
 	return special_moves
 
 func _get_valid_castle_move(king_unit, direction, max_step):
