@@ -2,6 +2,10 @@ extends TileMap
 
 enum DrawLayers {TERRAIN, FOLIAGE, EFFECTS}
 enum AutotilerLayers {GROUND, CLIFFS, FOLIAGE_GREEN, FOLIAGE_YELLOW}
+enum TileSources {TERRAIN, EFFECTS}
+enum HighlightColors {MOVE, ATTACK, ORIGIN}
+
+var highlighted_cells = []
 
 
 func _ready():
@@ -34,3 +38,13 @@ func _ready():
 func map_to_global(cell):
 	var cell_local_position = map_to_local(cell)
 	return to_global(cell_local_position)
+
+func highlight_cells(cells, color=HighlightColors.MOVE):
+	for cell in cells:
+		set_cell(DrawLayers.EFFECTS, cell, TileSources.EFFECTS, Vector2.ZERO, color)
+		highlighted_cells.append(cell)
+
+func clear_all_highlighted_cells():
+	for cell in highlighted_cells:
+		erase_cell(DrawLayers.EFFECTS, cell)
+	highlighted_cells = []

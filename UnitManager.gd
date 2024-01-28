@@ -19,6 +19,7 @@ func init_board():
 		for element in slice:
 			if element.is_valid_int():
 				column += int(element)
+				continue
 			else:
 				var unit_info = get_unit_info_from_symbol(element)
 				var map_cell = Vector2i(column, row)
@@ -33,6 +34,8 @@ func create_unit_at_cell(unit_info, map_cell):
 	var unit = UnitScene.instantiate()
 	unit.init(unit_info)
 	unit.global_position = unit_global_position
+	unit.connect("was_selected", _on_Unit_was_selected)
+	unit.connect("was_unselected", _on_Unit_was_unselected)
 	add_child(unit)
 	emit_signal("unit_spawned_at_cell", unit, map_cell)
 
@@ -51,3 +54,16 @@ func get_unit_info_from_symbol(symbol: String):
 		"unit_side": unit_side
 	}
 	return unit_info
+
+func _on_Unit_was_selected(unit):
+	GameState.selected_unit = unit
+	var move_cells = GameState.get_movement(unit)
+	var attack_cells = GameState.get_attack(unit)
+	var unit_cell = GameState.get_unit_cell(unit)
+	map.highlight_cells(move_cells, map.HighlightColors.MOVE)
+	map.highlight_cells(attack_cells, map.HighlightColors.ATTACK)
+	map.highlight_cells([unit_cell], map.HighlightColors.ORIGIN)
+
+func _on_Unit_was_unselected(unit):
+	GameState.selected_unit = null
+	map.clear_all_highlighted_cells()

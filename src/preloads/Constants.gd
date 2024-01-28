@@ -95,14 +95,22 @@ var UNITS = {
 			Vector2i.UP,
 			Vector2i.DOWN,
 			Vector2i.LEFT,
-			Vector2i.RIGHT
+			Vector2i.RIGHT,
+			Vector2i(1, 1),
+			Vector2i(1, -1),
+			Vector2i(-1, 1),
+			Vector2i(-1, -1)
 		],
 		"move_directions_special": [],
 		"attack_directions": [
 			Vector2i.UP,
 			Vector2i.DOWN,
 			Vector2i.LEFT,
-			Vector2i.RIGHT
+			Vector2i.RIGHT,
+			Vector2i(1, 1),
+			Vector2i(1, -1),
+			Vector2i(-1, 1),
+			Vector2i(-1, -1)
 		]
 	},
 	"queen": {
@@ -114,14 +122,22 @@ var UNITS = {
 			Vector2i.UP,
 			Vector2i.DOWN,
 			Vector2i.LEFT,
-			Vector2i.RIGHT
+			Vector2i.RIGHT,
+			Vector2i(1, 1),
+			Vector2i(1, -1),
+			Vector2i(-1, 1),
+			Vector2i(-1, -1)
 		],
 		"move_directions_special": [],
 		"attack_directions": [
 			Vector2i.UP,
 			Vector2i.DOWN,
 			Vector2i.LEFT,
-			Vector2i.RIGHT
+			Vector2i.RIGHT,
+			Vector2i(1, 1),
+			Vector2i(1, -1),
+			Vector2i(-1, 1),
+			Vector2i(-1, -1)
 		]
 	}
 }
@@ -175,9 +191,9 @@ func _init_map_cells_meta():
 					Vector2i.DOWN: cells_south,
 					Vector2i.LEFT: cells_west,
 					Vector2i.RIGHT: cells_east,
-					Vector2i(-1, 1): min(cells_north, cells_west), # first half diag 1
-					Vector2i(1, -1): min(cells_south, cells_east), # second half diag 1
-					Vector2i(1, 1): min(cells_north, cells_east), # first half diag 2
-					Vector2i(-1, -1): min(cells_south, cells_west)  # second half diag 2
+					Vector2i(-1, -1): min(cells_north, cells_west), # first half diag 1
+					Vector2i(1, 1): min(cells_south, cells_east), # second half diag 1
+					Vector2i(1, -1): min(cells_north, cells_east), # first half diag 2
+					Vector2i(-1, 1): min(cells_south, cells_west)  # second half diag 2
 				}
 			}
