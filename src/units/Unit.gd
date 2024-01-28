@@ -11,6 +11,7 @@ var is_selected = false
 var is_hovered = false
 
 var has_moved = false
+var en_passant = false
 
 signal was_selected(unit)
 signal was_unselected(unit)
