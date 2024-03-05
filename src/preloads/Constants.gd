@@ -8,120 +8,32 @@ var UNITS = {
 	"pawn": {
 		"sprites": {
 			"head": preload("res://assets/units/components/Head/HeadPawn.png")
-		},
-		"move_type": MOVE_TYPES.CELL,
-		"move_directions": [],
-		"attack_directions": [],
-		"has_special_move": true,
-		"has_special_attack": true
+		}
 	},
 	"rook": {
 		"sprites": {
 			"head": preload("res://assets/units/components/Head/HeadRook.png")
-		},
-		"move_type": MOVE_TYPES.SLIDE,
-		"move_directions": [
-			Vector2i.UP,
-			Vector2i.DOWN,
-			Vector2i.LEFT,
-			Vector2i.RIGHT
-		],
-		"attack_directions": [
-			Vector2i.UP,
-			Vector2i.DOWN,
-			Vector2i.LEFT,
-			Vector2i.RIGHT
-		],
-		"has_special_move": false,
-		"has_special_attack": false
+		}
 	},
 	"knight": {
 		"sprites": {
 			"head": preload("res://assets/units/components/Head/HeadKnight.png")
-		},
-		"move_type": MOVE_TYPES.CELL,
-		"move_directions": [
-			Vector2i(1, -2),
-			Vector2i(2, -1),
-			Vector2i(2, 1),
-			Vector2i(1, 2),
-			Vector2i(-1, 2),
-			Vector2i(-2, 1),
-			Vector2i(-2, -1),
-			Vector2i(-1, -2),
-		],
-		"move_directions_special": [],
-		"attack_directions": [
-			Vector2i(1, -2),
-			Vector2i(2, -1),
-			Vector2i(2, 1),
-			Vector2i(1, 2),
-			Vector2i(-1, 2),
-			Vector2i(-2, 1),
-			Vector2i(-2, -1),
-			Vector2i(-1, -2),
-		],
-		"has_special_move": false,
-		"has_special_attack": false
+		}
 	},
 	"bishop": {
 		"sprites": {
 			"head": preload("res://assets/units/components/Head/HeadBishop.png")
-		},
-		"move_type": MOVE_TYPES.SLIDE,
-		"move_directions": [
-			Vector2i(1, 1),
-			Vector2i(1, -1),
-			Vector2i(-1, 1),
-			Vector2i(-1, -1)
-		],
-		"move_directions_special": [],
-		"attack_directions": [
-			Vector2i(1, 1),
-			Vector2i(1, -1),
-			Vector2i(-1, 1),
-			Vector2i(-1, -1)
-		],
-		"has_special_move": false,
-		"has_special_attack": false
+		}
 	},
 	"king": {
 		"sprites": {
 			"head": preload("res://assets/units/components/Head/HeadKing.png")
-		},
-		"move_type": MOVE_TYPES.CELL,
-		"move_directions": [],
-		"attack_directions": [],
-		"has_special_move": true,
-		"has_special_attack": true
+		}
 	},
 	"queen": {
 		"sprites": {
 			"head": preload("res://assets/units/components/Head/HeadQueen.png")
-		},
-		"move_type": MOVE_TYPES.SLIDE,
-		"move_directions": [
-			Vector2i.UP,
-			Vector2i.DOWN,
-			Vector2i.LEFT,
-			Vector2i.RIGHT,
-			Vector2i(1, 1),
-			Vector2i(1, -1),
-			Vector2i(-1, 1),
-			Vector2i(-1, -1)
-		],
-		"attack_directions": [
-			Vector2i.UP,
-			Vector2i.DOWN,
-			Vector2i.LEFT,
-			Vector2i.RIGHT,
-			Vector2i(1, 1),
-			Vector2i(1, -1),
-			Vector2i(-1, 1),
-			Vector2i(-1, -1)
-		],
-		"has_special_move": false,
-		"has_special_attack": false
+		}
 	}
 }
 
@@ -174,9 +86,9 @@ func _init_map_cells_meta():
 					Vector2i.DOWN: cells_south,
 					Vector2i.LEFT: cells_west,
 					Vector2i.RIGHT: cells_east,
-					Vector2i(-1, -1): min(cells_north, cells_west), # first half diag 1
-					Vector2i(1, 1): min(cells_south, cells_east), # second half diag 1
-					Vector2i(1, -1): min(cells_north, cells_east), # first half diag 2
-					Vector2i(-1, 1): min(cells_south, cells_west)  # second half diag 2
+					Vector2i.UP + Vector2i.LEFT: min(cells_north, cells_west), # first half diag 1
+					Vector2i.DOWN + Vector2i.RIGHT: min(cells_south, cells_east), # second half diag 1
+					Vector2i.UP + Vector2i.RIGHT: min(cells_north, cells_east), # first half diag 2
+					Vector2i.DOWN + Vector2i.LEFT: min(cells_south, cells_west)  # second half diag 2
 				}
 			}

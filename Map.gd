@@ -22,6 +22,7 @@ func _ready():
 			var map_cell = Vector2i(col, row)
 			BetterTerrain.set_cell(self, DrawLayers.TERRAIN, map_cell, AutotilerLayers.GROUND)
 			BetterTerrain.update_terrain_cell(self, DrawLayers.TERRAIN, map_cell)
+			GameState.add_interactable_cell(map_cell)
 	
 	# set map cliffs
 	for col in map_shape.x:
@@ -34,6 +35,9 @@ func _ready():
 			var map_cell = Vector2i(col, row)
 			BetterTerrain.set_cell(self, DrawLayers.FOLIAGE, map_cell, AutotilerLayers.FOLIAGE_GREEN)
 			BetterTerrain.update_terrain_cell(self, DrawLayers.FOLIAGE, map_cell)
+
+func global_to_map(target_position):
+	return local_to_map(to_local(target_position))
 
 func map_to_global(cell):
 	var cell_local_position = map_to_local(cell)
